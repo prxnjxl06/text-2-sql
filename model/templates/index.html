@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google LLM Code Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        textarea, pre {
+            width: 100%;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 1em;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .code-block {
+            position: relative;
+        }
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generate Code with Google LLM</h1>
+        <form action="/generate" method="post">
+            <label for="prompt">Enter your prompt:</label>
+            <textarea id="prompt" name="prompt" rows="4" placeholder="Ask for any code...">{{ prompt or '' }}</textarea>
+            <br />
+            <button type="submit">Generate Code</button>
+        </form>
+        <br />
+
+        {% if generated_code %}
+        <div>
+            <h2>Generated Code:</h2>
+            <div class="code-block">
+                <pre><code class="language-python">{{ generated_code | safe }}</code></pre>
+                <button class="copy-btn" onclick="copyToClipboard()">Copy</button>
+            </div>            
+            <form action="/execute" method="post">
+                <textarea name="generated_code" hidden>{{ generated_code }}</textarea>
+                <button type="submit">Run Code</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if execution_result %}
+        <div>
+            <h2>Execution Result:</h2>
+            <pre>{{ execution_result }}</pre> <!-- Display execution result (e.g., print output or errors) -->
+        </div>
+        {% endif %}
+
+        {% if output_image_path %}
+        <div>
+            <h2>Generated Output (Chart):</h2>
+            <img src="{{ output_image_path }}" alt="Generated Chart" /> <!-- Display generated chart -->
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        function copyToClipboard() {
+            var codeBlock = document.querySelector("pre code");
+            var text = codeBlock.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Code copied to clipboard!");
+            });
+        }
+    </script>
+</body>
+</html>
