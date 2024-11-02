@@ -1,0 +1,13 @@
+Product,Region,Sales_Units,Sales_Amount
+Product_A,North,500,10000
+Product_B,South,450,9000
+Product_C,East,600,12000
+Product_A,West,550,11000
+Product_B,North,480,9600
+Product_C,South,510,10200
+Product_A,East,530,10600
+Product_B,West,470,9400
+Product_C,North,620,12400
+Product_A,South,590,11800
+Product_B,East,560,11200
+Product_C,West,570,11400

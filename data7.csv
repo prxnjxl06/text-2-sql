@@ -1,0 +1,11 @@
+City,Month,Temperature(°C),Humidity(%),Rainfall(mm)
+New York,January,-1,65,78
+Los Angeles,January,15,45,5
+Chicago,January,-5,70,85
+Houston,January,12,50,10
+Phoenix,January,20,30,2
+New York,February,0,62,68
+Los Angeles,February,16,42,4
+Chicago,February,-3,72,75
+Houston,February,14,48,9
+Phoenix,February,22,28,1
